@@ -457,6 +457,11 @@ namespace Oxide.Plugins
             BasePlayer targetPlayer = BasePlayer.FindByID(Convert.ToUInt64(CmdSteamID));
             Kits_Kit kitToGive = FindKit(CmdKitName);
 
+            if(kitToGive == null) {
+                PrintError(string.Format("Kit '{0}' does not exist, cannot continue giving the kit to the player", CmdKitName));
+                return;
+            }
+
             if(!GiveKitToPlayer(kitToGive, targetPlayer, CmdAmount)) {
                 PrintError("Something went wrong while giving a player a kit; see above errors for more information");
             } else {
@@ -495,6 +500,11 @@ namespace Oxide.Plugins
             BasePlayer sourcePlayer = BasePlayer.FindByID(Convert.ToUInt64(CmdFromSteamID));
             BasePlayer targetPlayer = BasePlayer.FindByID(Convert.ToUInt64(CmdToSteamID));
             Kits_Kit kitToGive = FindKit(CmdKitName);
+
+            if(kitToGive == null) {
+                PrintError(string.Format("Kit '{0}' does not exist, cannot continue giving the kit to the player", CmdKitName));
+                return;
+            }
 
             if(sourcePlayer == null) {
                 // Scratched my head on this one, so you'll want to keep this here. A player that's offline and dead (so no sleeper)
