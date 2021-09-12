@@ -366,6 +366,8 @@ namespace Oxide.Plugins
             permission.RegisterPermission(newKit.Permission, this);
             permission.GrantUserPermission(player.UserIDString, newKit.Permission, this);
 
+            Puts("Successfully given '" + player.displayName + "' " + amount + "x '" + baseKit.Name + "' kit");
+
             // This only saves the data file, we still need to reload Kits but we'll do that later on.
             SaveKits();
             
@@ -385,6 +387,8 @@ namespace Oxide.Plugins
 
             // We do this instead of resetting playerdata in case someone buys multiple at once    
             playerKit.Amount = amount > 0  ? playerKit.Amount + amount : playerKit.Amount + 1;
+
+            Puts("Successfully given '" + player.displayName + "' " + amount + "x '" + playerKit.Name + "' kit");
 
             SaveKits();
             
@@ -465,7 +469,7 @@ namespace Oxide.Plugins
             if(!GiveKitToPlayer(kitToGive, targetPlayer, CmdAmount)) {
                 PrintError("Something went wrong while giving a player a kit; see above errors for more information");
             } else {
-                Puts("Successfully given '" + targetPlayer.displayName + "' " + CmdAmount + "x '" + CmdKitName + "' kit");
+                //Puts("Successfully given '" + targetPlayer.displayName + "' " + CmdAmount + "x '" + CmdKitName + "' kit");
 
                 string msgDisplayname = $"<color={Conf.KitNameColor}>{kitToGive.DisplayName}</color>";
                 MessagePlayer(targetPlayer, Lang("KitGiven", targetPlayer.UserIDString, msgDisplayname));
